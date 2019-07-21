@@ -1,21 +1,32 @@
 // Code your solution in this file
-function driversWithRevenueOver(array,number){
-  const result = array.filter(arif => arif.revenue > number);
-  return result;
-}
-function driverNamesWithRevenueOver(array,number){
-  const result = array.filter(arif => arif.revenue > number);
-  const result2 =result.map(isim=>isim.name);
-  return result2;
+function driversWithRevenueOver (drivers, revenue) {
+  return drivers.filter(function (driver) {
+    return driver.revenue > revenue;
+  });
 }
 
-function exactMatch(array,obj){
-  for (const key in obj){
-return array.filter(driver => driver[key] === obj[key]);
-}}
+function driverNamesWithRevenueOver (drivers, revenue) {
+  return driversWithRevenueOver(drivers, revenue)
+    .map(function (driver) {
+      return driver.name;
+    });
+}
 
+function exactMatch (drivers, matcher) {
+  return drivers.filter(function (driver) {
+    let matches = false;
 
-function exactMatchToList(array, obj){
-const list = exactMatch(array, obj)
-return list.map(driver => driver.name)
-} 
+    for (const key in matcher) {
+      matches = driver[key] === matcher[key];
+    }
+
+    return matches;
+  });
+}
+
+function exactMatchToList (drivers, matcher) {
+  return exactMatch(drivers, matcher)
+    .map(function (driver) {
+      return driver.name;
+    });
+}
